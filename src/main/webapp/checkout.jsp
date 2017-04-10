@@ -4,35 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
-<title>Success</title>
+<title>Checkout</title>
 </head>
 <body>
+
 	<%
-		//allow access only if session exists
-		String user = (String) session.getAttribute("user");
 		String userName = null;
 		String sessionID = null;
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("user"))
+				if (cookie.getName().equals("user")) {
 					userName = cookie.getValue();
-				if (cookie.getName().equals("JSESSIONID"))
+				}
+				if (cookie.getName().equals("JSESSIONID")) {
 					sessionID = cookie.getValue();
+				}
 			}
 		}
 	%>
 	
-	<h3>Hi <%= userName %>, Login successful. Your Session ID: <%=sessionID %></h3>
+	<h3>
+		Hi <%=userName%>, your Session ID is <%=sessionID %>, do the checkout.
+	</h3>
 
-	<h3>User session attribute: <%=user %></h3>
-	
-	<a href="checkout.jsp">Checkout Page</a>
+	<div style="margin-top: 20px">
 		<form action="LogoutServlet" method="post">
-			<input type="submit" value="Logout" >
+			<input type="submit" value="Logout">
 		</form>
-	
+	</div>
 </body>
 </html>
